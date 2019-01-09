@@ -8,6 +8,7 @@ import warnings
 from collections import namedtuple, OrderedDict, Sequence
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Optional, List
 from uuid import UUID
 
 import yaml
@@ -78,7 +79,7 @@ class Dataset(object):
     :param list[str] uris: All active uris for the dataset
     """
 
-    def __init__(self, type_, metadata_doc, local_uri=None, uris=None, sources=None,
+    def __init__(self, type_, metadata_doc, local_uri=None, uris: List[str] = None, sources=None,
                  indexed_by=None, indexed_time=None, archived_time=None):
         assert isinstance(type_, DatasetType)
 
@@ -126,7 +127,7 @@ class Dataset(object):
         return self.type.metadata_type if self.type else None
 
     @property
-    def local_uri(self):
+    def local_uri(self) -> Optional[str]:
         """
         The latest local file uri, if any.
         :rtype: str
@@ -703,6 +704,7 @@ class GridSpec(object):
         :param dict geobox_cache: Optional cache to re-use geoboxes instead of creating new one each time
         :return: iterator of grid cells with :py:class:`GeoBox` tiles
         """
+
         def geobox(tile_index):
             if geobox_cache is None:
                 return self.tile_geobox(tile_index)

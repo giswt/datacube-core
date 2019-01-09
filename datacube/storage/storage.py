@@ -10,7 +10,7 @@ Important functions are:
 import logging
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 import urllib.parse
 from urllib.parse import urlparse, urljoin
@@ -392,7 +392,7 @@ def _url2rasterio(url_str, fmt, layer):
     return str(uri_to_local_path(url_str))
 
 
-def _choose_location(dataset: Dataset) -> str:
+def _choose_location(dataset: Dataset) -> Optional[str]:
     # If there's a local (filesystem) URI, prefer it.
     local_uri = dataset.local_uri
     if local_uri:

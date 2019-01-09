@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 import yaml
 
 from .impl import VirtualProduct, Transformation, VirtualProductException

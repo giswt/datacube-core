@@ -13,6 +13,7 @@ products implementing the same interface.
 from abc import ABC, abstractmethod
 from collections.abc import Mapping
 from functools import reduce
+from typing import Any, Dict
 
 import numpy
 import xarray
