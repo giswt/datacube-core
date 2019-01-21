@@ -265,3 +265,7 @@ def check_legacy_open(index):
     mm = [dss[0].type.measurements['blue']]
     xx = dc.load_data(sources, gbox, mm)
     assert (xx == data_array).all()
+
+    with rasterio.Env():
+        xx_lazy = dc.load_data(sources, gbox, mm, dask_chunks={'time': 1})
+        assert xx_lazy['blue'].data.dask
